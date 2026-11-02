@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8f5">
+  <meta name="description" content="Organiza: acompanhe suas finanças de um jeito simples e leve.">
+  <title>Organiza — sua vida financeira em ordem</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#" aria-label="Organiza, início">
+        <img class="brand-mark" src="assets/organiza.png" alt="">
+        <span class="brand-name">organiza<span>.</span></span>
+      </a>
+
+      <div class="nav-group">
+        <p class="nav-label">MENU</p>
+        <nav class="nav-links">
+          <a class="nav-link active" href="#inicio" data-section="inicio">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+            <span>Visão geral</span>
+          </a>
+          <a class="nav-link" href="#movimentacoes" data-section="movimentacoes">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h15m0 0-4-4m4 4-4 4M20 17H5m0 0 4-4m-4 4 4 4"/></svg>
+            <span>Movimentações</span>
+          </a>
+          <a class="nav-link" href="#categorias-detalhe" data-section="categorias">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 21 19H3l9-15.5Z"/><path d="M12 9v4m0 3h.01"/></svg>
+            <span>Categorias</span>
+          </a>
+          <a class="nav-link" href="#relatorios-detalhe" data-section="relatorios">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M6.5 16V10m5 6V5m5 11v-4"/></svg>
+            <span>Relatórios</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <span class="help-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 4.7 1.2c-.8 1.2-2.3 1.5-2.3 3.3m0 3h.01"/></svg>
+          </span>
+          <strong>Um passo de cada vez</strong>
+          <p>Pequenos hábitos fazem uma grande diferença.</p>
+          <span class="help-decoration" aria-hidden="true"></span>
+        </div>
+        <button class="nav-link exit-link" id="exit-button" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3.5M13 4h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-5"/></svg>
+          <span>Sair</span>
+        </button>
+        <p class="sidebar-footnote">FEITO COM CALMA, PARA VOCÊ.</p>
+      </div>
+    </aside>
+
+    <main class="main-content" id="inicio">
+      <header class="topbar">
+        <div class="breadcrumb"><span>Seu espaço</span><span class="breadcrumb-divider">/</span><strong>Visão geral</strong></div>
+        <div class="topbar-actions">
+          <label class="search-box">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.3 4.3"/></svg>
+            <input id="search-input" type="search" placeholder="Buscar movimentação..." aria-label="Buscar movimentação">
+            <kbd>⌘ K</kbd>
+          </label>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <section class="welcome-row">
+          <div>
+            <p class="eyebrow" id="today-label">SEU RESUMO FINANCEIRO</p>
+            <h1>Visão geral</h1>
+            <p class="welcome-copy">Aqui está o panorama das suas finanças.</p>
+          </div>
+          <button class="button button-primary" id="add-transaction" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m-7-7h14"/></svg>
+            Nova movimentação
+          </button>
+        </section>
+
+        <section class="summary-grid" aria-label="Resumo financeiro">
+          <article class="summary-card balance-card">
+            <div class="card-topline">
+              <span class="card-label">Saldo total</span>
+              <span class="card-icon balance-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M3.5 9h17m-5 5h.01"/></svg>
+              </span>
+            </div>
+            <p class="summary-value" id="balance-value">R$ 0,00</p>
+            <p class="card-footnote"><span class="trend-pill" id="balance-trend">Saldo acumulado</span> <span>de todas as movimentações</span></p>
+            <span class="card-glow" aria-hidden="true"></span>
+          </article>
+          <article class="summary-card">
+            <div class="card-topline">
+              <span class="card-label">Entradas do mês</span>
+              <span class="card-icon income-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg>
+              </span>
+            </div>
+            <p class="summary-value" id="income-value">R$ 0,00</p>
+            <p class="card-footnote"><span class="trend-text" id="income-trend">0 movimentações</span> <span>neste mês</span></p>
+            <div class="mini-bars income-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+          <article class="summary-card">
+            <div class="card-topline">
+              <span class="card-label">Saídas do mês</span>
+              <span class="card-icon expense-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7v10H7"/></svg>
+              </span>
+            </div>
+            <p class="summary-value" id="expense-value">R$ 0,00</p>
+            <p class="card-footnote"><span class="trend-negative" id="expense-trend">0 movimentações</span> <span>neste mês</span></p>
+            <div class="mini-bars expense-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+        </section>
+
+        <section class="insights-grid">
+          <article class="panel chart-panel" id="fluxo">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">VISÃO DO PERÍODO</p>
+                <h2>Fluxo financeiro</h2>
+              </div>
+              <button class="select-button" id="period-button" type="button" aria-label="Período: últimos 6 meses">
+                Últimos 6 meses
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+              </button>
+            </div>
+            <div class="chart-legend">
+              <span><i class="legend-dot income-dot"></i>Entradas</span>
+              <span><i class="legend-dot expense-dot"></i>Saídas</span>
+            </div>
+            <div class="chart-area" role="img" aria-label="Gráfico de barras comparando entradas e saídas nos últimos seis meses">
+              <div class="chart-grid" id="chart-grid">
+                <span>R$ 8 mil</span><span>R$ 6 mil</span><span>R$ 4 mil</span><span>R$ 2 mil</span><span>R$ 0</span>
+              </div>
+              <div class="chart-columns" id="chart-columns"></div>
+            </div>
+          </article>
+
+          <article class="panel categories-panel" id="categorias-resumo">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">PARA ONDE VAI</p>
+                <h2>Despesas por categoria</h2>
+              </div>
+              <button class="subtle-icon-button" id="category-more" type="button" aria-label="Ver categorias">···</button>
+            </div>
+            <div class="category-overview">
+              <div class="donut-chart" id="donut-chart" role="img" aria-label="Gráfico de despesas por categoria">
+                <div class="donut-hole"><span>Total gasto</span><strong id="donut-total">R$ 0</strong></div>
+              </div>
+              <div class="category-legend" id="category-legend"></div>
+            </div>
+            <button class="text-link" id="all-categories" type="button">Ver todas as categorias <span aria-hidden="true">→</span></button>
+          </article>
+        </section>
+
+        <section class="panel transactions-panel" id="movimentacoes">
+          <div class="transactions-heading">
+            <div>
+              <p class="eyebrow">ACOMPANHE DE PERTO</p>
+              <h2>Movimentações recentes</h2>
+            </div>
+            <button class="text-link" id="see-all" type="button">Ver todas <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">DESCRIÇÃO</th>
+                  <th scope="col">CATEGORIA</th>
+                  <th scope="col">DATA</th>
+                  <th scope="col">VALOR</th>
+                  <th scope="col"><span class="sr-only">Ações</span></th>
+                </tr>
+              </thead>
+              <tbody id="transaction-list"></tbody>
+            </table>
+            <div class="empty-state" id="empty-state" hidden>
+              <span class="empty-icon" aria-hidden="true">⌕</span>
+              <strong>Nenhuma movimentação por aqui</strong>
+              <p>Tente outro termo ou adicione uma movimentação nova.</p>
+            </div>
+          </div>
+        </section>
+        <p class="demo-note">Seus dados são carregados e salvos no banco de dados do Organiza.</p>
+
+        <section class="detail-section" id="categorias-detalhe">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">ORGANIZE SEUS GASTOS</p>
+              <h2>Categorias</h2>
+              <p class="section-description">Acompanhe entradas e despesas registradas em cada categoria.</p>
+            </div>
+          </div>
+          <article class="panel detail-panel">
+            <div class="table-wrap">
+              <table class="detail-table">
+                <thead>
+                  <tr>
+                    <th scope="col">CATEGORIA</th>
+                    <th scope="col">ENTRADAS</th>
+                    <th scope="col">DESPESAS</th>
+                    <th scope="col">LANÇAMENTOS</th>
+                    <th scope="col"><span class="sr-only">Ações</span></th>
+                  </tr>
+                </thead>
+                <tbody id="category-list"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="detail-section" id="relatorios-detalhe">
+          <div class="section-title report-heading">
+            <div>
+              <p class="eyebrow">SEU DINHEIRO, EM PERSPECTIVA</p>
+              <h2>Relatórios</h2>
+              <p class="section-description">Consulte o resultado mensal e exporte os lançamentos em CSV.</p>
+            </div>
+            <div class="report-actions">
+              <label class="month-picker">
+                <span>Mês do relatório</span>
+                <input id="report-month" type="month" aria-label="Mês do relatório">
+              </label>
+              <button class="button button-primary" id="export-report" type="button">Exportar CSV</button>
+            </div>
+          </div>
+          <div class="report-summary">
+            <article class="summary-card report-card">
+              <span class="card-label">Entradas</span>
+              <strong class="summary-value" id="report-income">R$ 0,00</strong>
+            </article>
+            <article class="summary-card report-card">
+              <span class="card-label">Despesas</span>
+              <strong class="summary-value" id="report-expenses">R$ 0,00</strong>
+            </article>
+            <article class="summary-card report-card">
+              <span class="card-label">Resultado do mês</span>
+              <strong class="summary-value" id="report-balance">R$ 0,00</strong>
+            </article>
+          </div>
+          <article class="panel detail-panel">
+            <div class="transactions-heading report-table-heading">
+              <div>
+                <p class="eyebrow">DETALHAMENTO MENSAL</p>
+                <h3 id="report-period-title">Movimentações por categoria</h3>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="detail-table">
+                <thead>
+                  <tr>
+                    <th scope="col">CATEGORIA</th>
+                    <th scope="col">ENTRADAS</th>
+                    <th scope="col">DESPESAS</th>
+                    <th scope="col">RESULTADO</th>
+                    <th scope="col">LANÇAMENTOS</th>
+                  </tr>
+                </thead>
+                <tbody id="report-category-list"></tbody>
+              </table>
+              <div class="empty-state" id="report-empty" hidden>
+                <strong>Nenhum lançamento neste mês</strong>
+                <p>Escolha outro período ou registre uma movimentação.</p>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="transaction-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-heading">
+        <div>
+          <p class="eyebrow">VAMOS REGISTRAR</p>
+          <h2 id="modal-title">Nova movimentação</h2>
+        </div>
+        <button class="icon-button close-modal" type="button" aria-label="Fechar">×</button>
+      </div>
+      <form id="transaction-form">
+        <div class="type-toggle" role="group" aria-label="Tipo da movimentação">
+          <button class="type-option selected" data-type="Despesa" type="button">Despesa</button>
+          <button class="type-option" data-type="Receita" type="button">Receita</button>
+        </div>
+        <input id="transaction-type" type="hidden" value="Despesa">
+        <label class="field-label" for="description">Descrição</label>
+        <input class="form-input" id="description" name="description" placeholder="Ex.: Conta de luz" maxlength="80" required>
+        <div class="form-row">
+          <div>
+            <label class="field-label" for="category">Categoria</label>
+            <select class="form-input" id="category" name="category" required>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Moradia">Moradia</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Educação">Educação</option>
+              <option value="Salário">Salário</option>
+              <option value="Vendas">Vendas</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="amount">Valor</label>
+            <div class="amount-input"><span>R$</span><input id="amount" name="amount" inputmode="decimal" placeholder="0,00" required></div>
+          </div>
+        </div>
+        <label class="field-label" for="transaction-date">Data</label>
+        <input class="form-input" id="transaction-date" name="date" type="date" required>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+        <button class="button button-primary submit-button" type="submit">Salvar movimentação <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

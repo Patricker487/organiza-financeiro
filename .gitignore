@@ -1,0 +1,21 @@
+# Local financial data and logs
+organiza.db
+organiza.db-journal
+organiza.db-shm
+organiza.db-wal
+organiza.log
+
+# Generated application and packaging output
+/build/
+/dist/
+/Organiza.spec
+*.lnk
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+
+# Local editor and operating-system files
+.vscode/
+Thumbs.db
+Desktop.ini
